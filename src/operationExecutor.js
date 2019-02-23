@@ -33,10 +33,9 @@ class OperationExecutor {
    * @returns object that contains source object and his modified clone
    */
   firstTaskExecute(arg) {
-    /**
-     * Place your code here
-     */
-    return null /* variable with result */;
+    let result = Object.assign(arg.obj1);
+    result.firstName = "zxcvbnm";
+    return  result/* variable with result */;
   }
 
   /**
@@ -46,10 +45,9 @@ class OperationExecutor {
    * @returns object that contains source objects and their combined and modified clone
    */
   secondTaskExecute(arg) {
-    /**
-     * Place your code here
-     */
-    return null /* variable with result */;
+    let result = Object.assign(arg.obj1, arg.obj2);
+    result.a = 800;
+    return result /* variable with result */;
   }
 
   /**
@@ -59,10 +57,14 @@ class OperationExecutor {
    * @returns object that contains modified source object
    */
   thirdTaskExecute(arg) {
-    /**
-     * Place your code here
-     */
-    return null /* variable with result */;
+    arg.obj1.relatives.forEach(elem => {
+        if(elem.firstName === "Roma")
+          Object.assign(elem, {"gender": "male"});
+        else
+          Object.assign(elem, {"gender": "female"});
+        });
+
+    return arg /* variable with result */;
   }
 
   /**
@@ -72,10 +74,17 @@ class OperationExecutor {
    * @returns object that contains array of string with female relatives
    */
   fourthTaskExecute(arg) {
-    /**
-     * Place your code here
-     */
-    return null /* variable with result */;
+    let gender = "female";
+    let result = {
+      greetings: []
+    };
+
+    arg.obj1.relatives.forEach( elem => {
+      if(elem.gender === gender) {
+        result.greetings.push(`Hello, ${elem.firstName} ${elem.lastName}`);
+      }
+    });
+    return result /* variable with result */;
   }
 
   /**
@@ -85,10 +94,9 @@ class OperationExecutor {
    * @returns string which contains the class of the button and current color
    */
   fifthTaskExecute(arg) {
-    /**
-     * Place your code here
-     */
-    return '';
+    let var1 = document.getElementsByClassName(arg.className)[0];
+    var1.style.backgroundColor = arg.color;
+    return var1;
   }
 
   /**
@@ -98,10 +106,11 @@ class OperationExecutor {
    * @returns object that contains array of items that match the hostname on which the application is running
    */
   sixthTaskExecute(arg) {
-    /**
-     * Place your code here
-     */
-    return null;
+    let result = Object.assign(arg);
+    while (result.hostNames.indexOf(document.location.hostname) !== -1) {
+      result.hostNames.splice(result.hostNames.indexOf(document.location.hostname), 1);
+    }
+    return result;
   }
 
   /**
@@ -111,10 +120,13 @@ class OperationExecutor {
    * @returns obj that contains swap pairs ('value: key')
    */
   seventhTaskExecute(arg) {
-    /**
-     * Place your code here
-     */
-    return null;
+    let el = {};
+
+    for(let i in arg) {
+      el[arg[i]] = i;
+    }
+
+    return el;
   }
 
   /**
@@ -124,10 +136,15 @@ class OperationExecutor {
    * @returns obj that built using array's values
    */
   eighthTaskExecute(arg) {
-    /**
-     * Place your code here
-     */
-    return null;
+    let arr = [];
+    arr = arg.arr1.concat(arg.arr2);
+    let result = {};
+
+    for(let i = 1; i < arr.length; i+= 2) {
+      result[arr[i - 1]] = arr[i];
+    }
+
+    return result;
   }
 
   /**
@@ -137,11 +154,21 @@ class OperationExecutor {
    * @returns obj that contains pairs id: obj with this id
    */
   ninthTaskExecute(arg) {
-    /**
-     * Place your code here
-     */
-    return null;
+    let result = {};
+
+    arg.users.forEach(elem => {
+      let idVal = elem.id;
+      result[idVal] = elem;
+    });
+    return result;
   }
+
+  /*for(var i = 0; i < document.getElementsByClassName(arg.className).childNodes.length; i++) {
+      arg.childrenInfo.push({
+        tag: elem.childNodes[i].tagName,
+        className: elem.childNodes[i].className
+      });
+    }*/
 
   /**
    * Tenth task of homework
@@ -150,10 +177,16 @@ class OperationExecutor {
    * @returns obj that contains the array with info about children of the node
    */
   tenthTaskExecute(arg) {
-    /**
-     * Place your code here
-     */
-    return null;
+    var elem = document.body.getElementsByClassName(arg.className).item(0).childNodes;
+
+    for(let i = 0; i < elem.length; i++) {
+      arg.childrenInfo.push({
+        tag: elem[i].tagName,
+        className: elem[i].className
+      });
+    }
+
+    return arg;
   }
 }
 
